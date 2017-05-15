@@ -28,6 +28,7 @@ class DB_Functions
         if (mysql_num_rows($result) > 0) {
             while ($row = mysql_fetch_array($result)) {
                 $event = array();
+                $event["unique_id"] = $row["unique_id"];
                 $event["year"] = $row["year"];
                 $event["month"] = $row["month"];
                 $event["day"] = $row["day"];

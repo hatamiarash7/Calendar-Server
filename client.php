@@ -10,18 +10,32 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
     // check for tag type
     /*************************************************************************************************/
     if ($tag == 'get_events') {
-            // user is already existed
-            $event = $db->GetEvents();
-            if ($event) {
-                $response["error"] = FALSE;
-                $response["event"] = $event;
-                echo json_encode($response);
-            } else {
-                // user failed to store
-                $response["error"] = TRUE;
-                $response["error_msg"] = "some error";
-                echo json_encode($response);
-            }
+        // user is already existed
+        $event = $db->GetEvents();
+        if ($event) {
+            $response["error"] = FALSE;
+            $response["event"] = $event;
+            echo json_encode($response);
+        } else {
+            // user failed to store
+            $response["error"] = TRUE;
+            $response["error_msg"] = "some error-" . $tag;
+            echo json_encode($response);
+        }
+    } else if ($tag == 'get_event') {
+        $title = $_POST['title'];
+        // user is already existed
+        $event = $db->GetEvent($title);
+        if ($event) {
+            $response["error"] = FALSE;
+            $response["event"] = $event;
+            echo json_encode($response);
+        } else {
+            // user failed to store
+            $response["error"] = TRUE;
+            $response["error_msg"] = "some error-" . $tag;
+            echo json_encode($response);
+        }
     } else {
         // unknown post's tag
         $response["error"] = TRUE;

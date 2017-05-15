@@ -33,7 +33,23 @@ class DB_Functions
                 $event["month"] = $row["month"];
                 $event["day"] = $row["day"];
                 $event["title"] = $row["title"];
+                $event["type"] = $row["type"];
                 $event["holiday"] = $row["holiday"];
+                array_push($response, $event);
+            }
+            return $response;
+        } else
+            return false;
+    }
+
+    public function GetEvent($title)
+    {
+        $response = array();
+        $result = mysql_query("SELECT * FROM cl_events WHERE title='$title'") or die(mysql_error());
+        if (mysql_num_rows($result) > 0) {
+            while ($row = mysql_fetch_array($result)) {
+                $event = array();
+                $event["unique_id"] = $row["unique_id"];
                 array_push($response, $event);
             }
             return $response;
